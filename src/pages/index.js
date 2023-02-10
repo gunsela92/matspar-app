@@ -1,9 +1,12 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { Inter } from '@next/font/google'
+import { Raleway } from '@next/font/google'
 import HeadBar from "@/Components/HeadBar";
+import styles from '@/styles/Home.module.css'
+import Tabs from "@/Components/Tabs";
+import ProductCard from "@/Components/ProductCard";
 
-const inter = Inter({ subsets: ['latin'] })
+const raleWay = Raleway({ subsets: ['latin'] })
 
 export default function Home() {
   return (
@@ -14,8 +17,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
+      <main className={raleWay.className}>
         <HeadBar />
+        <content>
+          <h3 className={styles.homeTitle}>Find your favorite products now.</h3>
+          <Tabs />
+          <ProductCard />
+        </content>
       </main>
     </>
   )

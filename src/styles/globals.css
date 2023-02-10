@@ -1,4 +1,14 @@
 @import "searchbar.css";
+@import "tabs.css";
+@import "product-card.css";
+
+/* create var colors */
+:root {
+    --green: #17A030;
+    --white: #ffffff;
+    --darkblue: #1B153D;
+}
+
 
 .main {
     display: flex;
