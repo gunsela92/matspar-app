@@ -32,7 +32,7 @@ const SearchBar = ({handleSearchFocus, setSuggestionResults}) => {
         const newStorageValues = [searchValue, ...storageValues];
         setStorage("recentSearches", newStorageValues)
       } else {
-        const newStorageValues = [...storageValues, searchValue];
+        const newStorageValues = [searchValue, ...storageValues];
         setStorage("recentSearches", newStorageValues)
       }
     } else {
