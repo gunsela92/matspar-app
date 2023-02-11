@@ -30,3 +30,15 @@ main {
     justify-content: space-between;
     align-items: center;
 }
+
+.menuHidden {
+    justify-content: flex-end;
+}
+
+.menuHidden .menuIcon {
+    display: none;
+}
+
+.menuHidden .searchInputWrapper {
+    width: 100%;
+}

@@ -9,7 +9,7 @@ const ProductCard = ({productData}) => {
   return (
     <div className={"product"}>
       <div className={"productImageWrapper"}>
-        <Image src={getProductImageUrl(productData?.image)} alt={productData?.name} layout="fill" className={"productImage"} />
+        {productData?.image && <Image src={getProductImageUrl(productData?.image)} alt={productData?.name} layout="fill" className={"productImage"} />}
       </div>
       <div className={"productInfo"}>
         <div className={"productInfoTitle"}>{productData.name}</div>

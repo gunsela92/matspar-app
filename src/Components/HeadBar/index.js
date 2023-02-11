@@ -1,21 +1,47 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Image from "next/image";
 import SearchBar from "@/Components/SearchBar";
 import SearchResults from "@/Components/SearchResults";
+import {getStorage} from "@/helpers/storageHelper";
 
 const HeadBar = ({setProducts, productList}) => {
-  const [isSearchFocused, setIsSearchFocused] = useState(true);
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [suggestionResults, setSuggestionResults] = useState([]);
+  const [recentSearches, setRecentSearches] = useState([]);
+  const [showSearchResults, setShowSearchResults] = useState(false);
 
   const handleSearchFocus = (value) => {
     setIsSearchFocused(value);
   }
 
+  useEffect(() => {
+    const storageValues = getStorage("recentSearches")
+    if (storageValues && storageValues.length > 0) {
+      setRecentSearches(storageValues)
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isSearchFocused) {
+      setShowSearchResults(true);
+    } else {
+      if (suggestionResults.length === 0 && recentSearches.length === 0) {
+        setShowSearchResults(false);
+      }
+    }
+  }, [isSearchFocused, showSearchResults, suggestionResults]);
+
+  const handleSelectResult = (value) => {
+    setProducts(value);
+    setShowSearchResults(false);
+  }
+
+
   return (
-    <div className={"headBar"}>
-      <Image src={"/Menu.svg"} alt={"Menu"} width={24} height={24} priority />
+    <div className={`headBar${isSearchFocused ? " menuHidden" : ""}`}>
+      <Image src={"/Menu.svg"} alt={"Menu"} width={24} height={24} priority className={"menuIcon"} onClick={() => setShowSearchResults(false)} />
       <SearchBar handleSearchFocus={handleSearchFocus} setSuggestionResults={(val) => setSuggestionResults(val)} />
-      <SearchResults show={isSearchFocused} suggestionResults={suggestionResults} setProducts={setProducts} productList={productList} />
+      <SearchResults show={showSearchResults} suggestionResults={suggestionResults} setProducts={handleSelectResult} productList={productList} recentSearches={recentSearches} setRecentSearches={(val) => setRecentSearches(val)} />
     </div>
   );
 };

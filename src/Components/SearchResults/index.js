@@ -2,16 +2,8 @@ import React, {useCallback, useEffect, useState} from "react";
 import {getStorage, removeStorage, setStorage} from "@/helpers/storageHelper";
 import Image from "next/image";
 
-const SearchResults = ({show, suggestionResults, setProducts}) => {
-  const [recentSearches, setRecentSearches] = useState([]);
+const SearchResults = ({show, recentSearches, setRecentSearches,  suggestionResults, setProducts}) => {
   const [activeResult, setActiveResult] = useState(-1);
-
-  useEffect(() => {
-    const storageValues = getStorage("recentSearches")
-    if (storageValues && storageValues.length > 0) {
-      setRecentSearches(storageValues)
-    }
-  }, []);
 
   const handleClearSearch = (value) => {
     if (value === "all") {
@@ -68,14 +60,14 @@ const SearchResults = ({show, suggestionResults, setProducts}) => {
   }
 
   useEffect(() => {
-    if (!show && suggestionResults.length === 0) {
+    if (!show && suggestionResults?.length === 0) {
       setActiveResult(-1)
     }
   }, [show, suggestionResults])
 
   return (
-    <div className={`searchContainer ${show || suggestionResults.length > 0 ? "active" : ""}`}>
-      {recentSearches.length > 0 && (
+    <div className={`searchContainer${show ? " active" : ""}`}>
+      {recentSearches?.length > 0 && suggestionResults?.length === 0 && (
         <div className={"recentSearches"}>
           <div className={"recentSearchesTitleWrapper"}>
             <h3 className={"recentSearches-title"}>Recent searches</h3>
@@ -86,6 +78,21 @@ const SearchResults = ({show, suggestionResults, setProducts}) => {
               <div className={`recentSearchesItem ${activeResult === index ? "active" : ""}`} key={index}>
                 <div className={"recentSearchesItemText"} onClick={() => handleSelectResult(item)}>{item}</div>
                 <Image className={"recentSearchesItemClear"} onClick={() => handleClearSearch(item)} src={"/Close.svg"} alt={"Menu"} width={18} height={18}/>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {suggestionResults?.length > 0 && (
+        <div className={"recentSearches"}>
+          <div className={"recentSearchesTitleWrapper"}>
+            <h3 className={"recentSearches-title"}>Popular searches</h3>
+          </div>
+          <div className={"recentSearchesList"}>
+            {suggestionResults.map((item, index) => (
+              <div className={`recentSearchesItem ${activeResult === index ? "active" : ""}`} key={index}>
+                <div className={"recentSearchesItemText"} onClick={() => handleSelectResult(item)}>{item?.text}</div>
+                <Image className={"recentSearchesItemClear"} onClick={() => handleClearSearch(item)} src={"/Search.svg"} alt={"Search"} width={18} height={18}/>
               </div>
             ))}
           </div>

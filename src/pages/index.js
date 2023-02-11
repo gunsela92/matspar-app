@@ -3,17 +3,24 @@ import { Raleway } from "@next/font/google"
 import HeadBar from "@/Components/HeadBar";
 import styles from "@/styles/Home.module.css"
 import Tabs from "@/Components/Tabs";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ProductListContainer from "@/Components/ProductListContainer";
+import {getHomeProducts} from "@/Services/product-services";
 
 const raleWay = Raleway({ subsets: ["latin"] })
 
-export default function Home() {
+export default function Home(props) {
   const [productList, setProductList] = useState([]);
 
   const handleProducts = (products) => {
     setProductList(products?.payload?.products);
   }
+
+  useEffect(() => {
+    if (props?.data?.payload?.products) {
+      setProductList(props?.data?.payload?.products)
+    }
+  }, [props]);
 
   return (
     <>
@@ -31,4 +38,9 @@ export default function Home() {
       </main>
     </>
   )
+};
+
+export async function getServerSideProps() {
+  const data = await getHomeProducts(); // maybe this is unnecessary but i wanted to show some random products when the page loads
+  return { props: { data } }
 }

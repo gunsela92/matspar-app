@@ -2,6 +2,7 @@
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
 }
 
 .searchInput {
@@ -16,14 +17,13 @@
     height: 48px;
     padding: 0 0 0 50px;
     width: 246px;
-    transition: width 0.2s ease-in-out;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
 .searchInput:focus {
-    width: 335px;
+    width: 100%;
 }
 
 .searchIcon {
@@ -50,7 +50,7 @@
 }
 
 .searchContainer.active {
-    height: calc(100vh - 70px);
+    height: calc(100vh - 75px);
     opacity: 1;
     border-top: 1px solid rgba(229, 229, 229, 0.32);
 }
