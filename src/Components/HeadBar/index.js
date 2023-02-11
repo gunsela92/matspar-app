@@ -22,10 +22,10 @@ const HeadBar = ({setProducts, productList}) => {
   }, []);
 
   useEffect(() => {
-    if (isSearchFocused) {
+    if (isSearchFocused && !showSearchResults) {
       setShowSearchResults(true);
     } else {
-      if (suggestionResults.length === 0 && recentSearches.length === 0) {
+      if (suggestionResults.length === 0 && recentSearches.length === 0 && showSearchResults) {
         setShowSearchResults(false);
       }
     }
@@ -35,6 +35,10 @@ const HeadBar = ({setProducts, productList}) => {
     setProducts(value);
     setShowSearchResults(false);
   }
+
+  useEffect(() => {
+    setSuggestionResults([]);
+  }, [showSearchResults]);
 
 
   return (
