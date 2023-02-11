@@ -76,8 +76,8 @@ const SearchResults = ({show, recentSearches, setRecentSearches,  suggestionResu
           <div className={"recentSearchesList"}>
             {recentSearches.map((item, index) => (
               <div className={`recentSearchesItem ${activeResult === index ? "active" : ""}`} key={index}>
-                <div className={"recentSearchesItemText"} onClick={() => handleSelectResult(item.text)}>{item}</div>
-                <Image className={"recentSearchesItemClear"} onClick={() => handleClearSearch(item.text)} src={"/Close.svg"} alt={"Menu"} width={18} height={18}/>
+                <div className={"recentSearchesItemText"} onClick={() => handleSelectResult(item)}>{item}</div>
+                <Image className={"recentSearchesItemClear"} onClick={() => handleClearSearch(item)} src={"/Close.svg"} alt={"Menu"} width={18} height={18}/>
               </div>
             ))}
           </div>
@@ -91,8 +91,8 @@ const SearchResults = ({show, recentSearches, setRecentSearches,  suggestionResu
           <div className={"recentSearchesList"}>
             {suggestionResults.map((item, index) => (
               <div className={`recentSearchesItem ${activeResult === index ? "active" : ""}`} key={index}>
-                <div className={"recentSearchesItemText"} onClick={() => handleSelectResult(item)}>{item?.text}</div>
-                <Image className={"recentSearchesItemClear"} onClick={() => handleClearSearch(item)} src={"/Search.svg"} alt={"Search"} width={18} height={18}/>
+                <div className={"recentSearchesItemText"} onClick={() => handleSelectResult(item.text)}>{item?.text}</div>
+                <Image className={"recentSearchesItemClear"} onClick={() => handleClearSearch(item.text)} src={"/Search.svg"} alt={"Search"} width={18} height={18}/>
               </div>
             ))}
           </div>
