@@ -16,10 +16,10 @@ const HeadBar = ({setProducts, productList}) => {
 
   useEffect(() => {
     const storageValues = getStorage("recentSearches")
-    if (storageValues && storageValues.length > 0) {
+    if (storageValues && storageValues.length > 0 && showSearchResults) {
       setRecentSearches(storageValues)
     }
-  }, []);
+  }, [showSearchResults]);
 
   useEffect(() => {
     if (isSearchFocused && !showSearchResults) {
@@ -39,7 +39,6 @@ const HeadBar = ({setProducts, productList}) => {
   useEffect(() => {
     setSuggestionResults([]);
   }, [showSearchResults]);
-
 
   return (
     <div className={`headBar${isSearchFocused ? " menuHidden" : ""}`}>
