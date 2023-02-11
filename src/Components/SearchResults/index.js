@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {getStorage, removeStorage, setStorage} from "@/helpers/storageHelper";
 import Image from "next/image";
+import {postApi} from "@/helpers/apiHelper";
 
 const SearchResults = ({show, recentSearches, setRecentSearches,  suggestionResults, setProducts}) => {
   const [activeResult, setActiveResult] = useState(-1);
@@ -46,14 +47,8 @@ const SearchResults = ({show, recentSearches, setRecentSearches,  suggestionResu
 
   const handleSelectResult = async (value) => {
     try {
-      const response = await fetch("api/product-search", {
-        method: "POST",
-        body: {
-          search: value
-        }
-      });
-      const data = await response.json();
-      setProducts(data)
+      const response = await postApi("api/product-search", {search: value})
+      setProducts(response)
     } catch (err) {
       console.log(err)
     }
