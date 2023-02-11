@@ -13,6 +13,8 @@
     cursor: pointer;
     font-size: 16px;
     white-space: pre;
+    font-weight: 500;
+    color: var(--gray);
 }
 
 .tab:not(:first-child) {
@@ -21,6 +23,7 @@
 
 .tab.active {
     color: var(--green);
+    font-weight: 600;
 }
 
 .tab.active::after {

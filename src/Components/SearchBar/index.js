@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import Image from 'next/image';
+import React, {useState} from "react";
+import Image from "next/image";
 import {getStorage, setStorage} from "@/helpers/storageHelper";
-import { Raleway } from '@next/font/google'
+import { Raleway } from "@next/font/google"
 
-const raleWay = Raleway({ weight: ['500'],subsets: ['latin'] })
+const raleWay = Raleway({ weight: ["500"],subsets: ["latin"] })
 
 const SearchBar = ({handleSearchFocus, setSuggestionResults}) => {
   const [searchValue, setSearchValue] = useState("");

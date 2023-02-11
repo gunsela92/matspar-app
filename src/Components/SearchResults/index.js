@@ -1,8 +1,8 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from "react";
 import {getStorage, removeStorage, setStorage} from "@/helpers/storageHelper";
 import Image from "next/image";
 
-const SearchResults = ({show, suggestionResults}) => {
+const SearchResults = ({show, suggestionResults, setProducts}) => {
   const [recentSearches, setRecentSearches] = useState([]);
   const [activeResult, setActiveResult] = useState(-1);
 
@@ -52,8 +52,19 @@ const SearchResults = ({show, suggestionResults}) => {
     }
   });
 
-  const handleSelectResult = (value) => {
-    console.log(value)
+  const handleSelectResult = async (value) => {
+    try {
+      const response = await fetch("api/product-search", {
+        method: "POST",
+        body: {
+          search: value
+        }
+      });
+      const data = await response.json();
+      setProducts(data)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   useEffect(() => {
@@ -61,7 +72,6 @@ const SearchResults = ({show, suggestionResults}) => {
       setActiveResult(-1)
     }
   }, [show, suggestionResults])
-
 
   return (
     <div className={`searchContainer ${show || suggestionResults.length > 0 ? "active" : ""}`}>

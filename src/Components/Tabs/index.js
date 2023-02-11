@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState} from "react";
 
-const Tabs = (props) => {
+const Tabs = () => {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const tabList = [ "Trendy foods", "Bread", "Milk", "Egg" ];
 
