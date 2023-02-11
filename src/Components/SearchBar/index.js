@@ -11,8 +11,11 @@ const SearchBar = ({handleSearchFocus, setSuggestionResults}) => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
+      if (searchValue.length === 0) {
+        return;
+      }
       handleLastSearch();
-      const response = await fetch(`api/search?searchValue=${searchValue}`);
+      const response = await fetch(`api/search?searchValue=${searchValue.trim()}`);
       const data = await response.json();
       setSuggestionResults(data.suggestions);
     } catch (err) {
