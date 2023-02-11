@@ -33,6 +33,9 @@ const SearchBar = ({handleSearchFocus, setSuggestionResults}) => {
         setStorage("recentSearches", newStorageValues)
       } else {
         const newStorageValues = [searchValue, ...storageValues];
+        if (newStorageValues.length > 5) {
+          newStorageValues.pop();
+        }
         setStorage("recentSearches", newStorageValues)
       }
     } else {
