@@ -38,7 +38,7 @@ export default function Home(props) {
       </main>
     </>
   )
-};
+}
 
 export async function getServerSideProps() {
   const data = await getHomeProducts(); // maybe this is unnecessary but i wanted to show some random products when the page loads

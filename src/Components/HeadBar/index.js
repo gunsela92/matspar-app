@@ -29,7 +29,7 @@ const HeadBar = ({setProducts, productList}) => {
         setShowSearchResults(false);
       }
     }
-  }, [isSearchFocused, showSearchResults, suggestionResults]);
+  }, [isSearchFocused, showSearchResults, suggestionResults, recentSearches]);
 
   const handleSelectResult = (value) => {
     setProducts(value);
