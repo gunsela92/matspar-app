@@ -19,7 +19,7 @@ const SearchResults = ({show, recentSearches, setRecentSearches,  suggestionResu
 
   const handleKeyDown = useCallback((event) => {
     const storageValues = getStorage("recentSearches")
-    if (storageValues.length > 0) {
+    if (storageValues?.length > 0) {
       if (event.key === "ArrowDown") {
         if (activeResult < storageValues.length - 1) {
           setActiveResult(activeResult + 1)

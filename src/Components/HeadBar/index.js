@@ -25,7 +25,7 @@ const HeadBar = ({setProducts, productList}) => {
     if (isSearchFocused && !showSearchResults) {
       setShowSearchResults(true);
     } else {
-      if (suggestionResults.length === 0 && recentSearches.length === 0 && showSearchResults) {
+      if (suggestionResults.length === 0 && recentSearches.length === 0 && showSearchResults && !isSearchFocused) {
         setShowSearchResults(false);
       }
     }
@@ -40,9 +40,15 @@ const HeadBar = ({setProducts, productList}) => {
     setSuggestionResults([]);
   }, [showSearchResults]);
 
+  const handleClickMenuButton = () => {
+    if (showSearchResults) {
+      setShowSearchResults(false);
+    }
+  }
+
   return (
     <div className={`headBar${isSearchFocused ? " menuHidden" : ""}`}>
-      <Image src={"/Menu.svg"} alt={"Menu"} width={24} height={24} priority className={"menuIcon"} onClick={() => setShowSearchResults(false)} />
+      <Image src={"/Menu.svg"} alt={"Menu"} width={24} height={24} priority className={"menuIcon"} onClick={handleClickMenuButton} />
       <SearchBar handleSearchFocus={handleSearchFocus} setSuggestionResults={(val) => setSuggestionResults(val)} />
       <SearchResults show={showSearchResults} suggestionResults={suggestionResults} setProducts={handleSelectResult} productList={productList} recentSearches={recentSearches} setRecentSearches={(val) => setRecentSearches(val)} />
     </div>
